@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SpendWise — Expense Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="hero">
+    <nav>
+      <div class="brand">SpendWise</div>
+      <a href="https://github.com/pratapabhay339-del" target="_blank" rel="noreferrer">GitHub ↗</a>
+    </nav>
+    <div class="hero-content">
+      <div>
+        <p class="eyebrow">PYTHON CAPSTONE PROJECT</p>
+        <h1>Know where your money goes.</h1>
+        <p class="subtitle">A portfolio-ready expense tracker built with Flask, SQLite, REST APIs and a responsive interface.</p>
+      </div>
+      <div class="hero-card">
+        <span>Total spending</span>
+        <strong id="totalAmount">₹0.00</strong>
+        <small id="expenseCount">0 transactions</small>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="grid top-grid">
+      <div class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">ADD EXPENSE</p>
+            <h2>Record a transaction</h2>
+          </div>
+        </div>
+        <form id="expenseForm">
+          <input type="hidden" id="expenseId">
+          <label>Title<input id="title" maxlength="100" required placeholder="e.g. Groceries"></label>
+          <div class="two-col">
+            <label>Amount (₹)<input id="amount" type="number" step="0.01" min="0.01" required placeholder="500"></label>
+            <label>Category
+              <select id="category" required>
+                <option value="">Choose</option>
+                <option>Food</option><option>Travel</option><option>Education</option>
+                <option>Shopping</option><option>Health</option><option>Entertainment</option>
+                <option>Bills</option><option>Other</option>
+              </select>
+            </label>
+          </div>
+          <label>Date<input id="expenseDate" type="date" required></label>
+          <label>Notes<textarea id="notes" maxlength="500" rows="3" placeholder="Optional note"></textarea></label>
+          <div class="form-actions">
+            <button class="primary" type="submit" id="saveBtn">Add expense</button>
+            <button class="ghost hidden" type="button" id="cancelBtn">Cancel edit</button>
+          </div>
+          <p class="message" id="formMessage"></p>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">BREAKDOWN</p>
+            <h2>By category</h2>
+          </div>
+        </div>
+        <div id="categoryBars" class="bars"></div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-heading list-heading">
+        <div>
+          <p class="eyebrow">TRANSACTIONS</p>
+          <h2>Your expenses</h2>
+        </div>
+        <div class="filters">
+          <input id="search" placeholder="Search...">
+          <select id="filterCategory">
+            <option value="">All categories</option>
+            <option>Food</option><option>Travel</option><option>Education</option>
+            <option>Shopping</option><option>Health</option><option>Entertainment</option>
+            <option>Bills</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Expense</th><th>Category</th><th>Date</th><th>Amount</th><th></th></tr></thead>
+          <tbody id="expenseRows"></tbody>
+        </table>
+      </div>
+      <div class="empty hidden" id="emptyState">No expenses found. Add your first transaction above.</div>
+    </section>
+  </main>
+
+  <footer>Built as a Python Capstone Project • Flask + SQLite • REST API</footer>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
